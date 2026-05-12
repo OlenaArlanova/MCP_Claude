@@ -1,0 +1,18 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      WARMY_API_TOKEN:
+        type: string
+        description: "Your Warmy API Bearer token. Find it in your Warmy account under Settings → API."
+    required:
+      - WARMY_API_TOKEN
+  commandFunction: |-
+    (config) => ({
+      command: "uvx",
+      args: ["warmy-mcp"],
+      env: {
+        WARMY_API_TOKEN: config.WARMY_API_TOKEN
+      }
+    })
