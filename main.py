@@ -1,4 +1,5 @@
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from starlette.middleware.base import BaseHTTPMiddleware
 from contextvars import ContextVar
 import asyncio
@@ -21,7 +22,10 @@ class _TokenMiddleware(BaseHTTPMiddleware):
         _current_token.set(token or os.environ.get("WARMY_API_TOKEN", ""))
         return await call_next(request)
 
-mcp = FastMCP("Warmy Templates")
+mcp = FastMCP(
+    "Warmy Templates",
+    transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=False),
+)
 
 BASE_URL = "https://api.warmy.io"
 TIMEOUT = 30.0
