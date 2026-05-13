@@ -12,6 +12,7 @@ dependencies = [
     "mcp[cli]",
     "httpx",
     "python-dotenv",
+    "uvicorn",
 ]
 
 [project.scripts]
